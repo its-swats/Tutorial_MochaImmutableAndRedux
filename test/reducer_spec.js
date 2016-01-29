@@ -38,4 +38,20 @@ describe ('reducer', () => {
     )
     expect(nextState).to.equal(expectedState);
   })
+
+  it('Handles undefined type', () => {
+    const initialState = Map();
+    const action = {type: 'undefined'};
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(initialState);
+  })
+
+  it('Has an initial state', () => {
+    const action = {type: 'SET_ENTRIES', entries: ['Batman', 'Hackers']};
+    const nextState = reducer(undefined, action);
+    const expectedState = fromJS(
+      {entries: ['Batman', 'Hackers']}
+    );
+    expect(nextState).to.equal(expectedState);
+  });
 })
