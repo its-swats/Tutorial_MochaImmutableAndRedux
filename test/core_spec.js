@@ -33,7 +33,31 @@ describe ('application logic', () => {
         entries: List.of('Sunshine', 'Batman')
       }))
     });
+
+    it ('puts the winner back in to rotation', () => {
+      const state = fromJS(
+        {vote: {pair: ['Trainspotting', '28 Days Later'], tally: {'Trainspotting': 4, '28 Days Later': 2}}, entries: List.of('Sunshine', '127 Hours', 'Batman')}
+        );
+      const expectedState = fromJS (
+        {vote: {pair: ['Sunshine', '127 Hours']}, entries: List.of('Batman', 'Trainspotting')}
+        );
+      const nextState = next(state);
+      expect(nextState).to.equal(expectedState);
+    })
+
+    it ('sets a winner when only one is left', () => {
+      const state = fromJS(
+        {vote: {pair: ['Trainspotting', 'Batman'], tally: {'Trainspotting': 1, 'Batman': 5}}, entries: List()}
+      )
+      const expectedState = fromJS(
+        {winner: 'Batman'}
+      )
+      const nextState = next(state);
+      expect(nextState).to.equal(expectedState);
+    })
+
   });
+
   describe('vote', () => {
     it ('created a tally for the voted entry', () => {
       const state = Map({
@@ -57,12 +81,13 @@ describe ('application logic', () => {
     it('adds to existing tally for the voted entry', () => {
       const state = fromJS(
         {vote: {pair: ['Trainspotting', '28 Days Later'], tally: {'Trainspotting': 3, '28 Days Later': 2}}, entries: []}
-      );
+        );
       const expectedState = fromJS(
         {vote: {pair: ['Trainspotting', '28 Days Later'], tally: {'Trainspotting': 4, '28 Days Later': 2}}, entries: []}
-      );
+        );
       const nextState = vote(state, 'Trainspotting');
       expect(nextState).to.equal(expectedState)
     })
   });
+
 });
