@@ -7,10 +7,11 @@ export default function reducer(state = INITIAL_STATE, action) {
     case 'NEXT':
       return next(state);
     case 'VOTE':
-      // return state.update('vote', voteState => vote(voteState, action.vote))
-      return state.update('vote', function(voteState) {
-        return vote(voteState, action.vote);
-      })
+      //The 2nd param is the VALUE for 'vote', we pass that in to vote() as voteState
+      return state.update('vote', voteState => vote(voteState, action.vote))
+      // return state.update('vote', function(voteState) {
+      //   return vote(voteState, action.vote);
+      // })
   }
   return state;
 }
