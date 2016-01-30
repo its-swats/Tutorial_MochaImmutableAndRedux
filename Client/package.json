@@ -1,0 +1,11 @@
+{
+  "name": "client_tutorial",
+  "version": "1.0.0",
+  "description": "client side tutorial for mocha, react, and redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

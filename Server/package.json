@@ -1,7 +1,7 @@
 {
-  "name": "Tutorial",
+  "name": "server_tutorial",
   "version": "1.0.0",
-  "description": "",
+  "description": "tutorial for server side mocha, redux, and sockets",
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
@@ -27,5 +27,8 @@
     "immutable": "^3.7.6",
     "redux": "^3.1.4",
     "socket.io": "^1.4.5"
+  },
+  "directories": {
+    "test": "test"
   }
 }
