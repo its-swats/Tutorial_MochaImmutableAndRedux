@@ -19,8 +19,6 @@ export function next(state) {
 }
 
 export function vote(voteState, entry) {
-  console.log(voteState)
-  console.log(entry)
   return voteState.updateIn(['tally', entry], 0, tally => tally + 1);
 }
 
