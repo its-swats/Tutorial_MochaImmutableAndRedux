@@ -72,7 +72,7 @@ describe('reducer', () => {
         tally: {Hackers: 5}
       }
     });
-    const action = {type: 'VOTE', entry: 'Hackers'};
+    const action = {type: 'VOTE', vote: 'Hackers'};
     const nextState = reducer(state, action);
     const expectedState = fromJS({
       vote: {

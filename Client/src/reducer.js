@@ -28,7 +28,7 @@ export default function(state = Map(), action){
     case 'SET_STATE':
       return resetVote(setState(state, action.state));
     case 'VOTE':
-      return vote(state, action.entry);
+      return vote(state, action.vote);
   }
   return state;
 }
