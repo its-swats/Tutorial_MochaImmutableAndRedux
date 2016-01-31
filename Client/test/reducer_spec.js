@@ -64,6 +64,57 @@ describe('reducer', () => {
     });
     expect(nextState).to.equal(expectedState);
   });
+
+  it('handles VOTE and sets hasVoted', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Hackers', 'Batman'],
+        tally: {Hackers: 5}
+      }
+    });
+    const action = {type: 'VOTE', entry: 'Hackers'};
+    const nextState = reducer(state, action);
+    const expectedState = fromJS({
+      vote: {
+        pair: ['Hackers', 'Batman'],
+        tally: {Hackers: 5}
+      },
+      hasVoted: 'Hackers'
+    })
+    expect(nextState).to.equal(expectedState);
+  });
+
+  it('does not work on an invalid entry', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Hackers', 'Batman'],
+        tally: {Hackers: 5}
+      }
+    });
+    const action = {type: 'VOTE', entry: 'Deadpool'};
+    const nextState = reducer(state, action);
+    const expectedState = fromJS({
+      vote: {
+        pair: ['Hackers', 'Batman'],
+        tally: {Hackers: 5}
+      }
+    });
+    expect(nextState).to.equal(expectedState);
+  })
+
+  it('removes voted state when pair changes', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Hackers', 'Batman'],
+        tally: {Hackers: 5}
+      },
+      hasVoted: 'Hackers'
+    });
+    const action = {type: 'SET_STATE', state: {vote:{pair:['Sunshine', 'Deadpool']}}};
+    const nextState = reducer(state, action);
+    const expectedState = fromJS({vote: {pair:['Sunshine', 'Deadpool']}});
+    expect(nextState).to.equal(expectedState);
+  })
 })
 
 
